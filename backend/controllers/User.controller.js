@@ -7,6 +7,7 @@ import { sendEmail } from "../utils/nodemailer.js";
 import { UserModel } from "../models/User.Model.js";
 import { OtpModel } from "../models/Otp.Model.js";
 import { setMongoose } from "../utils/Mongoose.js";
+
 export const signUp = async (req, res, next) => {
   try {
     const { email, name, password } = req.body;
@@ -19,7 +20,7 @@ export const signUp = async (req, res, next) => {
       password: hashedPassword,
       name,
     });
-    res.status(201).json({ message: "Sign Up Successful!" });
+    res.status(201).json({message: "Sign Up Successful!" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -61,7 +62,7 @@ export const logout = async (req, res) => {
 export const persistUserSession = async (req, res, next) => {
   const id = req.session.userId;
   if (!id) {
-    return res.status(403).send({ message: "Please Login Again" });
+    return res.status(403).json({ message: "Please Login Again" });
   }
   const user = await UserModel.findById({ _id: id });
   if (!user) {
@@ -103,6 +104,7 @@ export const updatePassword = async (req, res, next) => {
 export const sendResetPasswordOTP = async (req, res, next) => {
   try {
     const { email } = req.body;
+    console.log(email);
     const user = await UserModel.findOne({ email });
     if (!user) throw new Error("User not found");
     const g_Otp = Math.floor(100000 + Math.random() * 900000);

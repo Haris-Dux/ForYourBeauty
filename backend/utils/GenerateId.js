@@ -1,4 +1,4 @@
-import { OrdersModel } from "../models/OrdersModel";
+import { OrdersModel } from "../models/OrdersModel.js";
 
 async function generateUniqueOrderId() {
   const prefix = "FYB-";

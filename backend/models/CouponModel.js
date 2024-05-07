@@ -32,8 +32,11 @@ const couponSchema = new Schema(
         type: Boolean
     },
    categories:{
-    type:Array,
+    type:[String],
     enum:["Skincare","Body Care","Haircare","Cosmetics"]
+   },
+   users:{
+    type: Array
    }
   },
   { timestamps: true }
